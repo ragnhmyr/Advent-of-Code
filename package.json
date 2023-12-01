@@ -1,0 +1,22 @@
+{
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "description": "Advent of code",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ragnhmyr/Advent-of-Code.git"
+  },
+  "keywords": [
+    "advent"
+  ],
+  "author": "Ragnhild Myrnes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ragnhmyr/Advent-of-Code/issues"
+  },
+  "homepage": "https://github.com/ragnhmyr/Advent-of-Code#readme"
+}
