@@ -53,7 +53,7 @@ print("sum of valid numbers", sum(valid_numbers))
 #PART 2
 
 # gears ={
-#     line_number: {index: [neighbor1,neighboer2]}
+#     line_number: {index: [neighbor1,neighbor2,neighbor3]}
 # }
 number_adjacent_gear_multiplied = []
 gears = {}
@@ -61,7 +61,7 @@ with open(file_name) as f:
     line_number = 0
     #get all the symbols in a dictionary
     for line in f:
-        match_gear_symbols = re.finditer(r"\*", line) #any symbol that is not a dot or any word character or space
+        match_gear_symbols = re.finditer(r"\*", line)
         gears[line_number] = {}
         for match in match_gear_symbols:
             gears[line_number][match.start()]=[] #get all the indexes of symbols in each line
