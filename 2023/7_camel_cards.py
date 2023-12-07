@@ -1,4 +1,4 @@
-file_name = '7_input.txt'
+file_name = '7_input_test.txt'
 
 #from lowest to highest
 card_strength = ["2","3","4","5","6","7","8","9","T","J","Q","K","A"]
@@ -77,17 +77,16 @@ with open(file_name) as f:
             sorted_cards_list.append(card)
         else:
             for i in range(len(sorted_cards_list)):
-                if card > sorted_cards_list[i]:
+                if card < sorted_cards_list[i]:
                     sorted_cards_list.insert(i, card)
                     break
                 elif i == len(sorted_cards_list)-1:
                     sorted_cards_list.append(card)
                     break
-    #reverse the list since 
-    sorted_cards_list.reverse()
+
     winnings = []
     for i in range(len(sorted_cards_list)):
-        #print(sorted_cards_list[i].cards, sorted_cards_list[i].type, "rank: ", i+1, "bid: ", sorted_cards_list[i].bid, "bid*rank: ", sorted_cards_list[i].get_bid_times_rank(i+1))
+        print(sorted_cards_list[i].cards, sorted_cards_list[i].type, "rank: ", i+1, "bid: ", sorted_cards_list[i].bid, "bid*rank: ", sorted_cards_list[i].get_bid_times_rank(i+1))
         winnings.append(sorted_cards_list[i].get_bid_times_rank(i+1))
 
     #print(winnings)
