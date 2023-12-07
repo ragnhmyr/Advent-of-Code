@@ -1,4 +1,4 @@
-file_name = '7_input_test.txt'
+file_name = '7_input.txt'
 
 #from lowest to highest
 card_strength = ["2","3","4","5","6","7","8","9","T","J","Q","K","A"]
@@ -14,9 +14,9 @@ class Hand:
         set_cards = set(self.cards)
         length_set_cards = len(set_cards)
         if length_set_cards == 5:
-            return "five-of-a-kind"
-        elif length_set_cards == 1:
             return "high-card"
+        elif length_set_cards == 1:
+            return "five-of-a-kind"
         elif length_set_cards == 4:
             return "one-pair"
         elif length_set_cards == 2: #can be four of a kind or full house
@@ -89,7 +89,5 @@ with open(file_name) as f:
         print(sorted_cards_list[i].cards, sorted_cards_list[i].type, "rank: ", i+1, "bid: ", sorted_cards_list[i].bid, "bid*rank: ", sorted_cards_list[i].get_bid_times_rank(i+1))
         winnings.append(sorted_cards_list[i].get_bid_times_rank(i+1))
 
-    #print(winnings)
     print(sum(winnings))
 
-#247827745 is too low
