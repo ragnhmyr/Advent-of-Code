@@ -1,4 +1,4 @@
-file_name="5_input.txt"
+file_name="5_input_test.txt"
 
 def get_location(seed_number, total_mapping_list):
     start_number = seed_number
