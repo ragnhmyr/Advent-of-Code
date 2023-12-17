@@ -14,17 +14,25 @@ def get_history_value(line):
         index += 1
         if len(set(allNumbers[index])) == 1: 
             allZeros = True
-            return calculate_value(allNumbers) 
-        # if sum(allNumbers[index]) == 0:
-        #     allZeros = True
-        #     return calculate_value(allNumbers)    
+            return calculate_value_backwards(allNumbers)   
     return 0
 
+#part 1
 def calculate_value(allNumbers):
     value = 0
     for i in range(len(allNumbers)):
         value += allNumbers[i][-1]
+    
     return value
+#part 2
+def calculate_value_backwards(allNumbers):
+    start_list = [0]
+    index = 0
+    for i in range(len(allNumbers)-1, -1, -1):
+        start_list.append(allNumbers[i][0] - start_list[index])
+        index+=1
+    return start_list[-1]
+# -16823 feil
 
 with open(file_name) as f:
     lines = f.readlines()
@@ -32,7 +40,6 @@ with open(file_name) as f:
     for i in range(len(lines)):
         value = get_history_value(lines[i])
         total+=value
-    print(total)
+    print("TOTAL", total)
 
-#1939607041 var for høyt
-#1939607039 funker
+#1041 total
