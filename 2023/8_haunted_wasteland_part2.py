@@ -1,5 +1,8 @@
+import time
+
 file_name = '8_input.txt'
 
+start_time = time.time()
 class Node:
     def __init__(self, string):
         self.nodeId, self.left, self.right = self.get_node_from_string(string)
@@ -57,7 +60,7 @@ with open(file_name, 'r') as f:
                 foundEnd = True
                 break
             for j in range(len(node_list)):
-                print(node_list[j], countEnds)
+                #print(node_list[j], countEnds)
                 if instruction[i] == 'L':
                     node_list[j] = nodes[node_list[j].get_left()]
                 elif instruction[i] == 'R':
@@ -66,5 +69,6 @@ with open(file_name, 'r') as f:
             iterations += 1
             if foundEnd == True:
                 break
-
+            
+print("--- %s seconds ---" % (time.time() - start_time))
 print("STEPS: ", steps)
