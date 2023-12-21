@@ -53,7 +53,7 @@ with open(file_name, 'r') as f:
     iterations = 0
     while foundEnd == False:
         for i in range(len(instruction)):
-            print("ITERATION: ", iterations)
+            #print("ITERATION: ", iterations)
             countEnds = 0
             countEnds = sum(node.isEndNode() for node in node_list)
             if countEnds == len(node_list):
