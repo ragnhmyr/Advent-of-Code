@@ -1,4 +1,4 @@
-file_name = '11_input_test.txt'
+file_name = '11_input.txt'
 
 galaxies = []
 galaxy_pairs = []
@@ -57,7 +57,7 @@ def getGalaxiesFromTextFile(this_file_name):
         columns = list(map(list, zip(*rows))) #transpose the list
         empty_rows = getEmptyRows(rows)
         empty_columns = getEmptyColumns(columns)
-        expansion = 10
+        expansion = 1000000
 
         for i in range(len(rows)):
             for j in range(len(columns)):
@@ -67,15 +67,16 @@ def getGalaxiesFromTextFile(this_file_name):
 
         for galaxy in galaxies:
             no_of_empty_columns_before_galaxy = len([i for i in empty_columns if i < galaxy.column])
-            print("EMPTY COLUMNS",  empty_columns)
-            print("GALAXY", galaxy)
-            print("NO OF EMPTY COLUMNS BEFORE GALAXY", no_of_empty_columns_before_galaxy)
+            # print("EMPTY COLUMNS",  empty_columns)
+            # print("GALAXY", galaxy)
+            # print("NO OF EMPTY COLUMNS BEFORE GALAXY", no_of_empty_columns_before_galaxy)
             if no_of_empty_columns_before_galaxy > 0:
-                galaxy.increaseColumn(no_of_empty_columns_before_galaxy*expansion)
+                galaxy.increaseColumn(no_of_empty_columns_before_galaxy*expansion-1*no_of_empty_columns_before_galaxy) #minus 1 because we don't want to increase the column of the galaxy itself
             no_of_empty_rows_before_galaxy = len([i for i in empty_rows if i < galaxy.row])
             if no_of_empty_rows_before_galaxy > 0:
-                galaxy.increaseRow(no_of_empty_rows_before_galaxy*expansion)
+                galaxy.increaseRow(no_of_empty_rows_before_galaxy*expansion-1*no_of_empty_rows_before_galaxy) 
         
+            print(galaxy)
         #now we have the new rows and columns
         #get the galaxies and save them in a list
         
@@ -89,3 +90,5 @@ for i in range(len(galaxies)-1):
 print("SUM SHORTEST PATHS", sum(shortest_paths))
 print("NUMBER OF PAIRS", len(shortest_paths))
 
+#not 1112
+#not 1076
