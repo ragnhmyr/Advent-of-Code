@@ -1,8 +1,8 @@
 
-
+#beware that it should go through all the numbers in the equation, not just until it finds a solution
 def evaluate(target, numbers, current=0, idx=0):
-    # Base case: if current matches target, return True
-    if current == target:
+    #if current matches target and we are at the end of the list, return True
+    if current == target and idx == len(numbers):
         return True
     if current > target: # no need to check further if current is already greater than target
         return False
