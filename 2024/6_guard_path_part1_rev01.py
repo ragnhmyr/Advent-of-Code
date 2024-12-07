@@ -76,8 +76,8 @@ def main_part_2():
     board = []
     initial_guard_row = 0
     initial_guard_column = 0
-    #brute force - add the obstacles one by one and check if the guard can reach the end
-    #can simplify it a bit by only adding obstacles in the path of the guard andn not to cells where the guard never reaches anyway
+    #Add the obstacles one by one and check if the guard can reach the end
+    #Only adding obstacles in the path of the guard and not to cells where the guard never reaches anyway
     with open('6_input.txt') as f:
         row = 0
         for line in f:
