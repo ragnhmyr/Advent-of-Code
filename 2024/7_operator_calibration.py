@@ -31,11 +31,13 @@ def main():
         target = test_values[i]
         numbers = equations[i]
         
-        if evaluate(target, numbers, current=numbers[0], idx=1):
+        if evaluate(target, numbers,numbers[0],1):
             test_values_true.append(target)
-            
+    #303876515442
     #303876515419 was too high
-    print("Sum total of test values: ", sum(test_values_true))
+    print("Number of test values that can be achieved: ", len(test_values_true))
+    print("Set of test values that can be achieved: ", len(set(test_values_true)))
+    print("Sum total of test values: ", sum(set(test_values_true)))
 
 
 main()
