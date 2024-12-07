@@ -14,7 +14,9 @@ def evaluate(target, numbers, current=0, idx=0):
     
     # Recurse with both operators
     return (evaluate(target, numbers, current + next_number, idx + 1) or
-            evaluate(target, numbers, current * next_number, idx + 1))
+            evaluate(target, numbers, current * next_number, idx + 1) or 
+            evaluate(target, numbers, int(str(current) + str(next_number)), idx + 1)
+            )
 
 def main():
     test_values = []
@@ -33,11 +35,9 @@ def main():
         
         if evaluate(target, numbers,numbers[0],1):
             test_values_true.append(target)
-    #303876515442
-    #303876515419 was too high
     print("Number of test values that can be achieved: ", len(test_values_true))
-    print("Set of test values that can be achieved: ", len(set(test_values_true)))
-    print("Sum total of test values: ", sum(set(test_values_true)))
+    #print("Set of test values that can be achieved: ", len(set(test_values_true)))
+    print("Sum total of test values: ", sum(test_values_true))
 
 
 main()
