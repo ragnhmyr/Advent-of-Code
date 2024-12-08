@@ -1,7 +1,6 @@
 
 # input is row and column of each antenna, need to find the antinode locations
 def find_antinode_locations(location1,location2,max_row,max_column): 
-    # Placeholder for the function implementation
     row1, column1 = location1
     row2, column2 = location2
     dist_row = row2 - row1
@@ -13,6 +12,38 @@ def find_antinode_locations(location1,location2,max_row,max_column):
         valid_antinodes.append(first_antinode)
     if second_antinode[0] >= 0 and second_antinode[0] < max_row and second_antinode[1] >= 0 and second_antinode[1] < max_column:
         valid_antinodes.append(second_antinode)
+    #add also the two locations of the antennas because these are also antinodes now
+    print("Antinode locations: ", valid_antinodes)
+    return valid_antinodes
+
+def find_antinode_locations_part2(location1,location2,max_row,max_column): 
+    row1, column1 = location1
+    row2, column2 = location2
+    dist_row = row2 - row1
+    dist_column = column2 - column1
+
+    valid_antinodes = set()
+
+    # Start with the two input locations, as they are now also antinodes
+    valid_antinodes.add(location1)
+    valid_antinodes.add(location2)
+
+    # Add antinodes by extending in both directions along the pattern
+    # Backward direction
+    current_row, current_col = row1 - dist_row, column1 - dist_column
+    while 0 <= current_row < max_row and 0 <= current_col < max_column:
+        valid_antinodes.add((current_row, current_col))
+        current_row -= dist_row
+        current_col -= dist_column
+
+    # Forward direction
+    current_row, current_col = row2 + dist_row, column2 + dist_column
+    while 0 <= current_row < max_row and 0 <= current_col < max_column:
+        valid_antinodes.add((current_row, current_col))
+        current_row += dist_row
+        current_col += dist_column
+
+    print("Antinode locations: ", valid_antinodes)
     return valid_antinodes
 
 
@@ -23,7 +54,7 @@ def main():
     no_columns = 0
     location_dict = {} #dictionary with the location of each antenna
     grid_to_draw = [] #grid to draw the antinode locations
-    with open('8_input_test.txt') as f:
+    with open('8_input.txt') as f:
         for line in f:
             this_line = line.strip()
             no_columns = len(this_line)
@@ -41,7 +72,7 @@ def main():
             for i in range(len(location_dict[key])):
                 for j in range(i+1,len(location_dict[key])):
                     #print("Checking antinodes for antenna ", key, " at locations ", location_dict[key][i], " and ", location_dict[key][j])
-                    antinode_location.extend(find_antinode_locations(location_dict[key][i],location_dict[key][j],no_rows,no_columns)) #Extend appends individual elements instead of the list itself
+                    antinode_location.extend(find_antinode_locations_part2(location_dict[key][i],location_dict[key][j],no_rows,no_columns)) #Extend appends individual elements instead of the list itself
     
     #create set to get all the unique values
     unique_locations = set(antinode_location)
