@@ -1,6 +1,7 @@
 import time
 
 diskmap = '23222120202525282820202020272722212121' # this is the test input
+#diskmap = "2333133121414131402"
 start_time = time.time()
 # diskmap = ""
 # with open('9_input.txt') as f:
@@ -54,7 +55,7 @@ print("Part 1 Process finished --- %s seconds ---" % (time.time() - start_time))
 start_time_2 = time.time()
 only_numbers_2 = [[str(key)] * int(disk_dict[key]["size"]) for key in disk_dict]
 only_numbers_2.reverse()
-print(only_numbers_2)
+print("numbers to check: ",only_numbers_2)
 start_string_2 = []
 for key in disk_dict:
     # Add numbers based on size
@@ -63,10 +64,12 @@ for key in disk_dict:
     space_list = ["."] * int(disk_dict[key]["space"])
     start_string_2.append([key_list, space_list])
 
-print(start_string_2)
+print("")
+print("\nstart string", start_string_2)
 for i in range(len(only_numbers_2)):
     size_this_list = len(only_numbers_2[i])
     list_looking_at = only_numbers_2[i]
+    list_replaced = False  # Flag for breaking the outer loop
     #print("List looking at:", list_looking_at)
     #print("Size this list:", size_this_list)
     for j in range(len(start_string_2)):
@@ -85,11 +88,13 @@ for i in range(len(only_numbers_2)):
             if replacements == size_this_list:
                 #print(f"Completed replacements for: {start_string_2[j][0]}")
                 start_string_2[-1-i][0] = ["." for _ in range(size_this_list)]  # Clear the corresponding number list
+                list_replaced = True
                 break 
+
 #print("****")
-print(start_string_2)
+print("\nstring after changes: ",start_string_2)
 result_list = [item for sublist in start_string_2 for inner_list in sublist for item in inner_list]
-print(result_list)
+print("\n result: ",result_list)
 checksum_part2 = 0
 #might have to be careful of id's and "."
 for i in range(len(result_list)):
