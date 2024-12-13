@@ -1,6 +1,6 @@
 import time 
 from collections import Counter
-test_input = "125 17"
+test_input = "125 17" #should be 22 stones after 6 blinkings
 real_input = "0 7 6618216 26481 885 42 202642 8791"
 
 start_time = time.time()
