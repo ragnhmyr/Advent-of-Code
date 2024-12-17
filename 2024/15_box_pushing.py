@@ -1,7 +1,7 @@
 moves = ""
 map_grid = []
 
-with open("15_input_test.txt") as f:
+with open("15_input.txt") as f:
     reading_map = True
     for line in f:
         line = line.strip()
@@ -29,18 +29,23 @@ def get_dir(symbol):
         return (1, 0)
 
 def push_box(row, col, direction, map_grid):
-    new_row, new_col = row + direction[0], col + direction[1]
-    if map_grid[new_row][new_col] == ".":
-        map_grid[new_row][new_col] = "O"
-        map_grid[row][col] = "."
-        return new_row, new_col, map_grid
-    elif map_grid[new_row][new_col] == "#": # hit a wall, don't move box
-        return row, col, map_grid
-    elif map_grid[new_row][new_col] == "O":
-        next_row, next_col, map_grid = push_box(new_row, new_col, direction, map_grid)
-        if (next_row, next_col) != (new_row, new_col):
-            map_grid[new_row][new_col] = "O" # Ensure the box is kept when pushing forward
-        return next_row, next_col, map_grid
+    current_row, current_col = row, col
+    boxes_to_move = [(row, col)]
+
+    # Traverse until hitting a wall or an empty space
+    while True:
+        new_row, new_col = current_row + direction[0], current_col + direction[1]
+        if map_grid[new_row][new_col] == "#":  # Hit a wall
+            return row, col, map_grid
+        if map_grid[new_row][new_col] == ".":  # Found empty space
+            for r, c in reversed(boxes_to_move):
+                map_grid[r][c] = "."  # Clear old box positions
+            for idx, (r, c) in enumerate(boxes_to_move):
+                map_grid[new_row - direction[0] * idx][new_col - direction[1] * idx] = "O"
+            return new_row, new_col, map_grid
+        if map_grid[new_row][new_col] == "O":
+            boxes_to_move.append((new_row, new_col))
+            current_row, current_col = new_row, new_col
 
 def move_robot_and_push(map_grid, row, col, direction):
     new_row, new_col = row + direction[0], col + direction[1]
@@ -78,9 +83,12 @@ move_nr = 0
 for move in moves:
     direction = get_dir(move)
     start_row, start_col, map_grid = move_robot_and_push(map_grid, start_row, start_col, direction)
-    print("Move nr: ", move_nr, "move symbol: ", move)
-    print("")
+    #print("Move nr: ", move_nr, "move symbol: ", move)
+    #print("")
     move_nr += 1
-    print_map(map_grid)
-    print("GPS:", calculate_gps(map_grid))
-    print("")
+    #print_map(map_grid)
+    #print("GPS:", calculate_gps(map_grid))
+    #print("")
+
+print_map(map_grid)
+print("GPS:", calculate_gps(map_grid))
