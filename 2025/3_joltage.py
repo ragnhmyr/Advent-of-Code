@@ -8,7 +8,7 @@ def read_file(file_name):
         lines = f.read().splitlines() 
         return lines
 
-lines = read_file('3_input_test.txt')
+lines = read_file('3_input.txt')
 
 joltage = []
 
@@ -28,29 +28,44 @@ def subsequences_of_2(s):
             subsequences.add(int(s[i] + s[j]))
     return subsequences
 
+#only works if not too long string
 def subsequences_of_length(s,length):
-    subsequences = set()
+    #subsequences = set()
     subsequences_length = combinations(s, length)
-    for c in subsequences_length:
-        subsequences.add(int(''.join(c)))
-    return subsequences
+    return subsequences_length
+
+def find_largest_subsequence(original_string: str, target_length: int) -> str:
+    number_of_deletions_allowed = len(original_string) - target_length
+    chosen_digits_stack = []
+
+    for current_digit in original_string:
+        # Remove smaller digits from the stack if the current digit is larger
+        # and we still have deletions available
+        while (number_of_deletions_allowed > 0 
+               and chosen_digits_stack 
+               and chosen_digits_stack[-1] < current_digit):
+            chosen_digits_stack.pop()
+            number_of_deletions_allowed -= 1
+
+        chosen_digits_stack.append(current_digit)
+
+    # If we still have deletions allowed, remove digits from the end
+    if number_of_deletions_allowed > 0:
+        chosen_digits_stack = chosen_digits_stack[:-number_of_deletions_allowed]
+
+    return "".join(chosen_digits_stack)
 
 part_2_joltage = []
 start = timer()
 for line in lines: 
     #part 1
     substrings = subsequences_of_2(line)
-    #print("Substrings of 2 for", line, ":", substrings)
     joltage.append(max(substrings))
-    #print("Max substring of 2 for", line, ":", max(substrings))
     #part 2
-    subsequences_part2 = subsequences_of_length(line,12)
-    part_2_joltage.append(max(subsequences_part2))
-    #print("Subsequences of length for", line, ":", subsequences)
+    biggest_number = int(find_largest_subsequence(line,12))
+    part_2_joltage.append(biggest_number)
 
 end = timer()
 print("Time: ", end - start)
-
-#print("Joltage list:", joltage)
 print("Sum of Joltage part 1", sum(joltage))
 print("Sum of Joltage part 2", sum(part_2_joltage))
