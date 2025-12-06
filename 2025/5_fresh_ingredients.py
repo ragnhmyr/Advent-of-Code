@@ -33,5 +33,16 @@ def part1():
                 break
     print("Sum of valid ingredients:", valid_ingredients)
 
+def part2():
+    file_name = "5_input_test.txt"
+    ranges, ingredients = read_ingredient_file(file_name)
+    print(ranges)
+    ranges.sort
+    print(ranges)
+    #fresh_ingredients = len(combined_ranges)
+    #print("Combined ranges:", combined_ranges)
+    #print("Number of fresh ingredients:", fresh_ingredients)
+
 if __name__ == "__main__":
-    part1()
+    #part1()
+    part2()
