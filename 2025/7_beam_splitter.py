@@ -49,11 +49,11 @@ def part2(char_list):
     print(new_char_list)
     print_char_list(new_char_list)
     for i in range(1,len(char_list)):
-        for j in range(len(char_list[i])):
-            if char_list[i][j]=="|" and (char_list[i][j+1] or char_list[i][j+1] == "^"):
+        for j in range(1,len(char_list[i])-1):
+            if char_list[i][j]=="|" and (char_list[i][j+1] or char_list[i][j-1] == "^"):
                 new_char_list[i][j] +=1
                 print_char_list(new_char_list)
-            if char_list[i-1][j] == "|":
+            if char_list[i-1][j] == "|" and char_list[i][j] not in [".","^"]:
                 new_char_list[i][j] +=1
                 print_char_list(new_char_list)
     print_char_list(new_char_list)
