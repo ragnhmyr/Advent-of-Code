@@ -48,13 +48,19 @@ def part2(char_list):
     new_char_list = [[0 if x == "|" else x for x in sublist] for sublist in char_list]
     print(new_char_list)
     print_char_list(new_char_list)
+    #for i in range(1,3):
     for i in range(1,len(char_list)):
-        for j in range(1,len(char_list[i])-1):
-            if char_list[i][j]=="|" and (char_list[i][j+1] or char_list[i][j-1] == "^"):
-                new_char_list[i][j] +=1
-                print_char_list(new_char_list)
-            if char_list[i-1][j] == "|" and char_list[i][j] not in [".","^"]:
-                new_char_list[i][j] +=1
+        for j in range(0,len(char_list[i])):
+            if char_list[i][j] == "|":
+                left_is_hat = (j - 1 >= 0 and char_list[i][j-1] == "^")
+                right_is_hat = (j + 1 < len(char_list[i])and char_list[i][j+1] == "^")
+
+                if left_is_hat or right_is_hat:
+                    new_char_list[i][j] += 1
+                    print_char_list(new_char_list)
+
+            if char_list[i-1][j] == "|" and char_list[i][j] not in [".", "^"]:
+                new_char_list[i][j] += 1
                 print_char_list(new_char_list)
     print_char_list(new_char_list)
 
