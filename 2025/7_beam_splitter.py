@@ -17,10 +17,15 @@ def print_char_list(list):
     
 def count_total_splits(char_list):
     #if `|` is above and to both sides of '^' count the split
-    return
+    total_splits = 0
+    for i in range(len(char_list)):
+        for j in range(len(char_list[i])):
+            if char_list[i][j] == "^" and (char_list[i][j-1] == char_list[i][j+1] == char_list[i-1][j] == "|"):
+                total_splits += 1 
+    return total_splits
 
 def part1():
-    filename = "7_input_test.txt"
+    filename = "7_input.txt"
     lines = read_file(filename)
     start_index = find_start_position(lines[0])
     char_list = [list(line) for line in lines[1:]]
@@ -33,7 +38,8 @@ def part1():
                 char_list[i][j+1] = "|"
             elif char_list[i][j] == "." and char_list[i-1][j] == "|":
                 char_list[i][j] = "|"
-            print_char_list(char_list)
+    print_char_list(char_list)
+    print("Total splits ", count_total_splits(char_list))
 
 if __name__ == "__main__":
     part1()
