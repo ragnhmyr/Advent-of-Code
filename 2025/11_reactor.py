@@ -22,7 +22,11 @@ def traverse_dict(device,reactor_dict):
             count_paths += traverse_dict(this_device,reactor_dict)
     return count_paths
 
-def traverse_dict_part2(device,reactor_dict,passed_fft,passed_dac):
+def traverse_dict_part2(device,reactor_dict,passed_fft,passed_dac,visited_devices):
+    # cycle detected → stop this path
+    if device in visited_devices:
+        return 0
+    visited_devices = visited_devices | {device} #add device to visited
     count_paths = 0
     next_devices = reactor_dict[device]
     #print("Next devices ", next_devices)
@@ -33,7 +37,7 @@ def traverse_dict_part2(device,reactor_dict,passed_fft,passed_dac):
             if passed_fft and passed_dac:
                 count_paths += 1
         else:
-            count_paths += traverse_dict_part2(this_device,reactor_dict,new_passed_fft,new_passed_dac)
+            count_paths += traverse_dict_part2(this_device,reactor_dict,new_passed_fft,new_passed_dac,visited_devices)
     return count_paths
 
 def part1():
@@ -55,7 +59,7 @@ def part2():
     sum_paths = 0
     for device in start_devices:
         print(device)
-        sum_paths+=traverse_dict_part2(device,reactor_dict,False,False)
+        sum_paths+=traverse_dict_part2(device,reactor_dict,False,False,set())
     print("Number of paths",sum_paths)
 
 if __name__ == "__main__":
