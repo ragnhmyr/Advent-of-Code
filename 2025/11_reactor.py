@@ -50,7 +50,7 @@ def part1():
 def part2():
     filename = "11_input.txt"
     reactor_dict = read_file(filename)
-    print(reactor_dict)
+    #print(reactor_dict)
     start_devices = reactor_dict['svr']
     sum_paths = 0
     for device in start_devices:
